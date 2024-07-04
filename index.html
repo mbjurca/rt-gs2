@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="gaussians semantic segmentation generalizable real-time novel-view">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>RT-GS2: Real-Time Generalizable Semantic Segmentation for 3D Gaussian Representations of Radiance Fields</title>
+  <!-- <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet"> -->
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">RT-GS2: Real-Time Generalizable Semantic Segmentation for 3D Gaussian Representations of Radiance Fields</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Mihnea-Bogdan Jurca</a><sup>*</sup>,</span>
+                <span class="author-block">
+                  <a href="https://remcoroyen.github.io/" target="_blank">Remco Royen</a><sup>*</sup>,</span>
+                  <span class="author-block">
+                    <a href="https://users.utcluj.ro/~igiosan/" target="_blank">Ion Giosan</a>
+                  </span>,
+                  <span class="author-block">
+                    <a href="https://www.etrovub.be/people/member/about-bio/acmuntea/" target="_blank">Adrian Munteanu</a>
+                  </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">Vrije Universiteit Brussel<br>Universitatea Tehnică din Cluj-Napoca</span>
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                  </div>
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code available soon </span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2405.18033" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay controls muted loop height="100%">
+        Your video here
+        <source src="static/videos/banner_video.mp4"
+        type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
+      </h2>
+    </div>
+  </div>
+</section> -->
+<!-- End teaser video -->
+
+
+<!-- Image section -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <div class="image">
+            <img src="static/images/motivation_figure.png" alt="Motivation figure">
+          </div>
+          <p>
+            Visualization of the enhanced view-consistency throughout subsequent frames.
+            (Top) Visualization of our view-independent 3D features using PCA, (middle) semantic
+            segmentation without the usage of view-independent 3D features, and (bottom) proposed
+            semantic segmentation when using our view-independent 3D features.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Image section -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Gaussian Splatting has revolutionized the world of novel view synthesis by achieving high rendering performance in real-time. Recently, studies have focused on enriching
+            these 3D representations with semantic information for downstream tasks. In this paper,
+            we introduce RT-GS2, the first generalizable semantic segmentation method employing
+            Gaussian Splatting. While existing Gaussian Splatting-based approaches rely on scene-specific training, RT-GS2 demonstrates the ability to generalize to unseen scenes. Our
+            method adopts a new approach by first extracting view-independent 3D Gaussian features
+            in a self-supervised manner, followed by a novel View-Dependent / View-Independent
+            (VDVI) feature fusion to enhance semantic consistency over different views. Extensive experimentation on three different datasets showcases RT-GS2’s superiority over
+            the state-of-the-art methods in semantic segmentation quality, exemplified by a 8.01%
+            increase in mIoU on the Replica dataset. Moreover, our method achieves real-time performance of 27.03 FPS, marking an astonishing 901 times speedup compared to existing
+            approaches. This work represents a significant advancement in the field by introducing, to the best of our knowledge, the first real-time generalizable semantic segmentation
+            method for 3D Gaussian representations of radiance fields.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Method -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            The architecture of the proposed method consists out of three
+            main stages: (i) a new self-supervised view-independent 3D Gaussian feature extractor, (ii)
+            the rendering of the 3D information encapsulated in the enhanced 3D Gaussians to a specific
+            view, and (iii) a novel View-Dependent / View-Independent (VDVI) feature fusion. The first
+            stage transforms a 3D Gaussian representation of a scene into a set of features. Important to
+            note is that since the proposed method operates on the entire 3D Gaussian representation as
+            input, the features are view-independent. In the second stage, the features are rendered by using alpha
+            blending, to a specific view , defined by a given pose. In parallel, the novel view is rendered. In the last stage, the novel VDVI feature fusion module,
+            extracts view-dependent features and fuses them at different scales. A joint decoder is employed to obtain the semantic predictions. By training the
+            model on different scenes, RT-GS2 is able to generalize semantic segmentation to unseen scenes.
+          </p>
+        </div>
+        <div class="image">
+          <img src="static/images/arch_overview_v6.png" alt="Method overview">
+        </div>
+        <h2 class="subtitle has-text-centered">
+          Overview of the proposed method.
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Method -->
+
+<!-- Image carousel -->
+<!-- <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          Your image here -->
+          <!-- <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
+          <h2 class="subtitle has-text-centered">
+            First image description.
+          </h2>
+        </div>
+        <div class="item">
+          Your image here -->
+          <!-- <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
+          <h2 class="subtitle has-text-centered">
+            Second image description.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- End Image carousel -->
+<!-- Experiments -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-justified">
+          <h3 class="subtitle">Quantitative</h3>
+            Experiments were conducted on three datasets: Replica, Scan-Net, and ScanNet++, representing synthetic and real-world indoor scenes. Experimental settings meticulously followed those of GSNeRF for Replica and ScanNet. Details and
+            splits are provided in the supplementary material. As evaluation metrics, we employed mean
+            Intersection over Union (mIoU), mean Accuracy (mAcc), and overall Accuracy (oAcc) for
+            segmentation, and Peak Signal-to-Noise Ratio (PSNR), Structural Similarity (SSIM), and
+            Learned Perceptual Image Patch Similarity (LPIPS) for rendering quality. Inference speed
+            was measured in Frames Per Second (FPS).
+            <div class="tables">
+              <!-- Table 1 -->
+              <div class="image">
+                <img src="static/images/table3.png" alt="Table 1">
+                <h2 class="subtitle has-text-centered" style="font-size: smaller;">
+                  Comparison on REPLICA of the proposed method against the state of the art
+                  for generalizable semantic segmentation and after finetuning on a specific scene. * denotes
+                  the addition of a semantic head.
+                </h2>
+              </div>
+              <!-- Table 2 -->
+              <div class="image">
+                <img src="static/images/table1.png" alt="Table 2">
+                <h2 class="subtitle has-text-centered" style="font-size: smaller;">
+                  Comparison on ScanNet of the proposed method against the state of the art for
+                  generalizable semantic segmentation and after finetuning on a specific scene. * denotes the
+                  addition of a semantic head.
+                </h2>
+              </div>
+              <!-- Table 3 -->
+              <div class="image">
+                <img src="static/images/table2.png" alt="Table 3">
+                <h2 class="subtitle has-text-centered" style="font-size: smaller;">
+                  Quantitative results on ScanNet++ of the proposed method for generalizable semantic segmentation and after finetuning on a specific scene.
+                </h2>
+              </div>
+          </div>
+        </div>
+        
+        <div class="content has-text-justified">
+          <h3 class="subtitle">Qualitative</h3>
+          We present qualitative results on two scenes from the Replica and ScanNet++ datasets. Our evaluation includes both semantic segmentation performance
+          and depth prediction, demonstrating the robustness of our learned features.
+          <section class="hero is-small">
+            <div class="hero-body">
+              <div class="container">
+                <div id="results-carousel" class="carousel results-carousel">
+                  <div class="item item-video1">
+                    <video poster="" id="video1" autoplay controls muted loop height="100%">
+                      <!-- Your video file here -->
+                      <source src="static/videos/Replica_1.mp4"
+                      type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-video2">
+                    <video poster="" id="video2" autoplay controls muted loop height="100%">
+                      <!-- Your video file here -->
+                      <source src="static/videos/replica_2.mp4"
+                      type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-video3">
+                    <video poster="" id="video3" autoplay controls muted loop height="100%">\
+                      <!-- Your video file here -->
+                      <source src="static/videos/scanetpp.mp4"
+                      type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-video4">
+                    <video poster="" id="video4" autoplay controls muted loop height="100%">
+                      <!-- Your video file here -->
+                      <source src="static/videos/scannetpp2.mp4"
+                      type="video/mp4">
+                    </video>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- End Experiments -->
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{jurca2024rt,
+        title={RT-GS2: Real-Time Generalizable Semantic Segmentation for 3D Gaussian Representations of Radiance Fields},
+        author={Jurca, Mihnea-Bogdan and Royen, Remco and Giosan, Ion and Munteanu, Adrian},
+        journal={arXiv preprint arXiv:2405.18033},
+        year={2024}
+      }</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
